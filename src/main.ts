@@ -7,12 +7,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-declare global {
-  interface CustomError extends Error {
-    status?: number;
-  }
-}
-
 dotenv.config({});
 
 const app = express();
@@ -28,17 +22,20 @@ app.all("*", async (req: Request, res: Response, next: NextFunction) => {
   next(error);
 });
 
-app.use((error: CustomError, req: Request, res: Response, next: NextFunction) => {
-  console.log("not found3", error);
-  if (error.status) {
-    return res.status(error.status).json({ message: error.message });
+app.use(
+  (error: CustomError, req: Request, res: Response, next: NextFunction) => {
+    console.log("not found3", error);
+    if (error.status) {
+      return res.status(error.status).json({ message: error.message });
+    }
+    res.status(500).json({ message: "Something went wrong!!" });
   }
-  res.status(500).json({ message: "Something went wrong!!" });
-});
+);
 
 const start = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI!);
+    console.log("Mongo Db");
   } catch (error) {
     console.log("Error connecting to db");
   }
