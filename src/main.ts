@@ -5,7 +5,10 @@ import { json, urlencoded } from "body-parser";
 
 import cors from "cors";
 import dotenv from "dotenv";
+import { htmlRouter } from "./routers/html";
 import mongoose from "mongoose";
+
+const path = require('path');
 
 dotenv.config({});
 
@@ -15,6 +18,8 @@ app.use(urlencoded({ extended: false }));
 app.use(json());
 
 //add router here
+app.use('/', htmlRouter);
+
 
 app.all("*", async (req: Request, res: Response, next: NextFunction) => {
   const error = new Error("Route not found") as CustomError;
@@ -24,7 +29,6 @@ app.all("*", async (req: Request, res: Response, next: NextFunction) => {
 
 app.use(
   (error: CustomError, req: Request, res: Response, next: NextFunction) => {
-    console.log("not found3", error);
     if (error.status) {
       return res.status(error.status).json({ message: error.message });
     }
