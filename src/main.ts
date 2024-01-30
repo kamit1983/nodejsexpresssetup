@@ -7,6 +7,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { htmlRouter } from "./routers/html";
 import mongoose from "mongoose";
+import { weatherRouter } from "./routers/weather";
 
 const path = require('path');
 
@@ -19,7 +20,7 @@ app.use(json());
 
 //add router here
 app.use('/', htmlRouter);
-
+app.use("/api", weatherRouter);
 
 app.all("*", async (req: Request, res: Response, next: NextFunction) => {
   const error = new Error("Route not found") as CustomError;
