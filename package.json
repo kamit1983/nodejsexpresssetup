@@ -22,11 +22,15 @@
     "nodemon": "^3.0.3"
   },
   "dependencies": {
+    "@simplewebauthn/server": "^13.1.1",
+    "@simplewebauthn/typescript-types": "^8.3.4",
     "axios": "^1.6.5",
+    "base64url": "^3.0.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "googleapis": "^148.0.0",
     "mongoose": "^8.1.0",
     "redis": "^4.6.12"
   }

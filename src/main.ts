@@ -5,6 +5,8 @@ import { json, urlencoded } from "body-parser";
 
 import cors from "cors";
 import dotenv from "dotenv";
+import { fpRouter } from "./routers/fpRouter";
+import { gdriveRouter } from "./routers/griveRouter";
 import { htmlRouter } from "./routers/html";
 import mongoose from "mongoose";
 
@@ -19,6 +21,8 @@ app.use(json());
 
 //add router here
 app.use('/', htmlRouter);
+app.use('/api/gdrive', gdriveRouter);
+app.use('/api/fingerprint', fpRouter);
 
 
 app.all("*", async (req: Request, res: Response, next: NextFunction) => {
