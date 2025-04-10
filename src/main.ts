@@ -42,8 +42,8 @@ app.use(
 
 const start = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI!);
-    console.log("Mongo Db");
+    // await mongoose.connect(process.env.MONGO_URI!);
+    // console.log("Mongo Db");
   } catch (error) {
     console.log("Error connecting to db");
   }
